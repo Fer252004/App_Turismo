@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JfPromotores extends JFrame {
 
@@ -34,6 +36,12 @@ public class JfPromotores extends JFrame {
 	private JTextField txtfechadenacimiento;
 	private JTextField txttelefono;
 	private JTextField txtcodigo;
+	
+	
+	   Promotores cr = new Promotores();
+	   private JButton btnborrar;
+	   private JTextField txtidpromotor;
+	   private JLabel lblNewLabel_10;
 
 	/**
 	 * Launch the application.
@@ -56,7 +64,7 @@ public class JfPromotores extends JFrame {
 	 */
 	public JfPromotores() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 602, 444);
+		setBounds(100, 100, 615, 450);
 		contentPane = new JPanel();
 		contentPane.addMouseListener(new MouseAdapter() {
 			
@@ -165,8 +173,27 @@ public class JfPromotores extends JFrame {
 				cr.create(txtnombre.getText(), txtapellido.getText(), Integer.parseInt(txtTipodedocumento.getText()), Integer.parseInt(txtDocumento.getText()), txtdireccion.getText(), txtcorreopersonal.getText(), txtcorreocor.getText(), txtfechadenacimiento.getText(), txttelefono.getText(), Integer.parseInt(txtcodigo.getText()));
 			}
 		});
-		btnGuardar.setBounds(311, 347, 89, 23);
+		btnGuardar.setBounds(408, 361, 89, 23);
 		contentPane.add(btnGuardar);
+		
+		btnborrar = new JButton("Borrar");
+		btnborrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.delete(Integer.parseInt(txtidpromotor.getText()));
+			}
+		});
+		btnborrar.setBounds(273, 361, 89, 23);
+		contentPane.add(btnborrar);
+		
+		txtidpromotor = new JTextField();
+		txtidpromotor.setBounds(83, 361, 113, 38);
+		contentPane.add(txtidpromotor);
+		txtidpromotor.setColumns(10);
+		
+		lblNewLabel_10 = new JLabel("Id  Promotor");
+		lblNewLabel_10.setBounds(117, 336, 66, 14);
+		contentPane.add(lblNewLabel_10);
 	}
 
 }

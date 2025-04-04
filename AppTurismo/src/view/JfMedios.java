@@ -14,6 +14,9 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JfMedios extends JFrame {
 
@@ -21,6 +24,12 @@ public class JfMedios extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtNombres;
 	private JTextField txtObservacion;
+	private JTextField txtidmedio;
+	private JLabel lblNewLabel_1;
+	private JButton btnEliminar;
+	
+	
+	  Medios cr = new Medios();
 
 	/**
 	 * Launch the application.
@@ -43,7 +52,7 @@ public class JfMedios extends JFrame {
 	 */
 	public JfMedios() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 494, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -55,7 +64,7 @@ public class JfMedios extends JFrame {
 			
 		
 		});
-		txtNombres.setBounds(134, 96, 128, 32);
+		txtNombres.setBounds(155, 96, 128, 32);
 		contentPane.add(txtNombres);
 		txtNombres.setColumns(10);
 		
@@ -75,6 +84,7 @@ public class JfMedios extends JFrame {
 		contentPane.add(lblNewLabel3);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\8666542_save_icon.png"));
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -86,7 +96,29 @@ public class JfMedios extends JFrame {
 				txtObservacion.setText("");
 			}
 		});
-		btnGuardar.setBounds(305, 101, 89, 23);
+		btnGuardar.setBounds(379, 75, 67, 49);
 		contentPane.add(btnGuardar);
+		
+		txtidmedio = new JTextField();
+		txtidmedio.setBounds(161, 33, 101, 31);
+		contentPane.add(txtidmedio);
+		txtidmedio.setColumns(10);
+		
+		lblNewLabel_1 = new JLabel("Id Medio");
+		lblNewLabel_1.setBounds(105, 41, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				cr.delete(Integer.parseInt(txtidmedio.getText()));			
+				
+			}
+		});
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
+		btnEliminar.setBounds(379, 149, 67, 49);
+		contentPane.add(btnEliminar);
 	}
 }

@@ -7,12 +7,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Modelo.Operador;
+import Modelo.Promotores;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JfOperadores extends JFrame {
 
@@ -26,7 +30,13 @@ public class JfOperadores extends JFrame {
 	private JTextField txtDireccion;
 	private JTextField txtTelefono;
 	private JTextField txtMatricula;
-
+	private JTextField txtidoperador;
+	private JLabel lblNewLabel_8;
+  
+	
+	Operador cr = new  Operador();
+	
+	 private JButton btnEliminar;
 	/**
 	 * Launch the application.
 	 */
@@ -48,7 +58,7 @@ public class JfOperadores extends JFrame {
 	 */
 	public JfOperadores() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 510, 376);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -56,29 +66,29 @@ public class JfOperadores extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Documento");
-		lblNewLabel_1.setBounds(188, 11, 46, 14);
+		lblNewLabel_1.setBounds(248, 11, 68, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		txtDocumento = new JTextField();
-		txtDocumento.setBounds(165, 36, 109, 20);
+		txtDocumento.setBounds(228, 36, 109, 20);
 		contentPane.add(txtDocumento);
 		txtDocumento.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Apellidos");
-		lblNewLabel_2.setBounds(200, 67, 46, 14);
+		lblNewLabel_2.setBounds(256, 67, 46, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		txtApellidos = new JTextField();
-		txtApellidos.setBounds(165, 92, 109, 20);
+		txtApellidos.setBounds(228, 86, 109, 20);
 		contentPane.add(txtApellidos);
 		txtApellidos.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Correo");
-		lblNewLabel_3.setBounds(200, 117, 46, 14);
+		lblNewLabel_3.setBounds(270, 117, 46, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		txtCorreo = new JTextField();
-		txtCorreo.setBounds(160, 142, 114, 20);
+		txtCorreo.setBounds(228, 142, 114, 20);
 		contentPane.add(txtCorreo);
 		txtCorreo.setColumns(10);
 		
@@ -128,17 +138,37 @@ public class JfOperadores extends JFrame {
 			 
 			}
 		});
-		txtRegistar.setBounds(309, 91, 89, 23);
+		txtRegistar.setBounds(376, 85, 89, 23);
 		contentPane.add(txtRegistar);
 		
 		txtMatricula = new JTextField();
-		txtMatricula.setBounds(175, 194, 130, 20);
+		txtMatricula.setBounds(228, 194, 130, 20);
 		contentPane.add(txtMatricula);
 		txtMatricula.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Matricula");
-		lblNewLabel.setBounds(212, 173, 46, 14);
+		lblNewLabel.setBounds(270, 173, 46, 14);
 		contentPane.add(lblNewLabel);
+	
+		txtidoperador = new JTextField();
+		txtidoperador.setBounds(379, 36, 86, 20);
+		contentPane.add(txtidoperador);
+		txtidoperador.setColumns(10);
+		
+		lblNewLabel_8 = new JLabel("Id Operador");
+		lblNewLabel_8.setBounds(395, 11, 46, 14);
+		contentPane.add(lblNewLabel_8);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.delete(Integer.parseInt(txtidoperador.getText()));
+			}
+		});
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
+		btnEliminar.setBounds(376, 129, 81, 46);
+		contentPane.add(btnEliminar);
 		
 	}
 }

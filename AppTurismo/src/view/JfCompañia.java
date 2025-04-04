@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JfCompañia extends JFrame {
 
@@ -30,7 +33,12 @@ public class JfCompañia extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
-
+	private JTextField txtidcompañia;
+	private JLabel lblNewLabel_6;
+	private JButton btnEliminar;
+    
+	
+	Compañia cr = new Compañia();
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +60,7 @@ public class JfCompañia extends JFrame {
 	 */
 	public JfCompañia() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 484, 333);
+		setBounds(100, 100, 573, 356);
 		contentPane = new JPanel();
 		contentPane.addMouseListener(new MouseAdapter() {
 			
@@ -63,57 +71,57 @@ public class JfCompañia extends JFrame {
 		contentPane.setLayout(null);
 		
 		txtrazonsocial = new JTextField();
-		txtrazonsocial.setBounds(102, 49, 86, 20);
+		txtrazonsocial.setBounds(170, 63, 86, 20);
 		contentPane.add(txtrazonsocial);
 		txtrazonsocial.setColumns(10);
 		
 		txtTelefono = new JTextField();
-		txtTelefono.setBounds(102, 103, 86, 20);
+		txtTelefono.setBounds(170, 117, 86, 20);
 		contentPane.add(txtTelefono);
 		txtTelefono.setColumns(10);
 		
 		txtCorreo = new JTextField();
-		txtCorreo.setBounds(102, 162, 86, 20);
+		txtCorreo.setBounds(170, 176, 86, 20);
 		contentPane.add(txtCorreo);
 		txtCorreo.setColumns(10);
 		
 		txtDireccion = new JTextField();
-		txtDireccion.setBounds(283, 49, 86, 20);
+		txtDireccion.setBounds(351, 63, 86, 20);
 		contentPane.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		
 		txtFechadecreacion = new JTextField();
-		txtFechadecreacion.setBounds(283, 103, 117, 20);
+		txtFechadecreacion.setBounds(331, 117, 117, 20);
 		contentPane.add(txtFechadecreacion);
 		txtFechadecreacion.setColumns(10);
 		
 		txtWeb = new JTextField();
-		txtWeb.setBounds(283, 162, 86, 20);
+		txtWeb.setBounds(351, 176, 86, 20);
 		contentPane.add(txtWeb);
 		txtWeb.setColumns(10);
 		
 		lblNewLabel = new JLabel("Razon social");
-		lblNewLabel.setBounds(112, 24, 76, 14);
+		lblNewLabel.setBounds(180, 38, 76, 14);
 		contentPane.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("Direccion");
-		lblNewLabel_1.setBounds(299, 25, 59, 14);
+		lblNewLabel_1.setBounds(351, 38, 59, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("Telefono");
-		lblNewLabel_2.setBounds(112, 80, 46, 14);
+		lblNewLabel_2.setBounds(180, 94, 46, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		lblNewLabel_3 = new JLabel("Correo");
-		lblNewLabel_3.setBounds(114, 145, 46, 14);
+		lblNewLabel_3.setBounds(180, 151, 46, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		lblNewLabel_4 = new JLabel("Web");
-		lblNewLabel_4.setBounds(299, 145, 46, 14);
+		lblNewLabel_4.setBounds(367, 151, 46, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		lblNewLabel_5 = new JLabel("Fecha de Creacion ");
-		lblNewLabel_5.setBounds(293, 80, 108, 14);
+		lblNewLabel_5.setBounds(351, 94, 108, 14);
 		contentPane.add(lblNewLabel_5);
 		
 		JButton btnRegistrar = new JButton("Registrar");
@@ -125,7 +133,26 @@ public class JfCompañia extends JFrame {
 				cr.create(txtrazonsocial.getText(),txtDireccion.getText(), txtTelefono.getText(), txtFechadecreacion.getText(), txtCorreo.getText(), txtWeb.getText());
 			}
 		});
-		btnRegistrar.setBounds(290, 227, 89, 23);
+		btnRegistrar.setBounds(180, 227, 89, 23);
 		contentPane.add(btnRegistrar);
+		
+		txtidcompañia = new JTextField();
+		txtidcompañia.setBounds(27, 63, 86, 20);
+		contentPane.add(txtidcompañia);
+		txtidcompañia.setColumns(10);
+		
+		lblNewLabel_6 = new JLabel("Id Compañia");
+		lblNewLabel_6.setBounds(39, 38, 74, 14);
+		contentPane.add(lblNewLabel_6);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cr.delete(Integer.parseInt(txtidcompañia.getText()));
+			}
+		});
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
+		btnEliminar.setBounds(361, 218, 76, 41);
+		contentPane.add(btnEliminar);
 	}
 }

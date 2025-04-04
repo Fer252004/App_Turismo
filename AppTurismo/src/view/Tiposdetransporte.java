@@ -13,6 +13,9 @@ import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Tiposdetransporte extends JFrame {
 
@@ -22,6 +25,8 @@ public class Tiposdetransporte extends JFrame {
 	private JTextField txtObservacion;
 	private JTextField txtIdtipo;
 
+	
+	   Tipodetransporte cr = new Tipodetransporte();
 	/**
 	 * Launch the application.
 	 */
@@ -80,7 +85,7 @@ public class Tiposdetransporte extends JFrame {
 				cr.create(txtNombre.getText(), txtObservacion.getText(), Integer.parseInt(txtIdtipo.getText()));
 			}
 		});
-		btnGuardar.setBounds(305, 75, 89, 23);
+		btnGuardar.setBounds(314, 72, 89, 23);
 		contentPane.add(btnGuardar);
 		
 		txtIdtipo = new JTextField();
@@ -91,5 +96,16 @@ public class Tiposdetransporte extends JFrame {
 		JLabel lblNewLabel3 = new JLabel("Id Tipo");
 		lblNewLabel3.setBounds(57, 57, 55, 14);
 		contentPane.add(lblNewLabel3);
+		
+		JButton brnEliminar = new JButton("Eliminar");
+		brnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.delete(Integer.parseInt(txtIdtipo.getText()));
+			}
+		});
+		brnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
+		brnEliminar.setBounds(328, 106, 66, 48);
+		contentPane.add(brnEliminar);
 	}
 }

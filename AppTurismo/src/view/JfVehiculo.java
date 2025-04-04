@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JfVehiculo extends JFrame {
 
@@ -27,6 +30,10 @@ public class JfVehiculo extends JFrame {
 	private JTextField txtnumeromotor;
 	private JTextField txtidtipo;
 	private JLabel lblNewLabel_8;
+	
+	
+	 Vehiculos cr = new Vehiculos();
+	 private JButton btnEliminar;
 
 	/**
 	 * Launch the application.
@@ -140,6 +147,17 @@ public class JfVehiculo extends JFrame {
 		lblNewLabel_8 = new JLabel("Numero De Motor");
 		lblNewLabel_8.setBounds(364, 78, 89, 14);
 		contentPane.add(lblNewLabel_8);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.delete(Integer.parseInt(txtmatricula.getText()));
+			}
+		});
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
+		btnEliminar.setBounds(200, 228, 67, 39);
+		contentPane.add(btnEliminar);
 	}
 }
 

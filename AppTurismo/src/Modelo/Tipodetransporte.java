@@ -73,4 +73,34 @@ public class Tipodetransporte {
 		}
 	
 	}
+	
+public void delete ( int idtipo) {
+		
+		
+		Connection dbConnection = null;
+		PreparedStatement pst = null; // preparar la trx
+		
+		String script = "delete from tbltipotransporte where idtipo  = ?";
+		
+		try {
+			dbConnection = conector.ConectarBD();// abrir la conexion 
+			pst = dbConnection.prepareStatement(script); // abrir el buffer
+			
+			//parametrizar el campo
+			pst.setInt(1, idtipo);
+			
+			// confirmar la operacion
+			int resp = JOptionPane.showConfirmDialog(null, "¿desea eliminar esta fila?");
+			
+			if(resp == JOptionPane.OK_OPTION) {
+				pst.executeUpdate();
+				JOptionPane.showConfirmDialog(null, "fila eliminada");
+			}
+			
+			
+		}catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		}
+	}
 }

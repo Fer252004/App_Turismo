@@ -13,6 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JfPaquetes extends JFrame {
 
@@ -31,7 +34,12 @@ public class JfPaquetes extends JFrame {
 	private JTextField txtIdPromotor;
 	private JTextField txtIdCliente;
 	private JTextField txtIdMedio;
+	private JButton btnBorrar;
+	private JTextField txtcodigo;
+	private JLabel lblNewLabel_13;
 
+	
+	   Paquete cr = new Paquete();
 	/**
 	 * Launch the application.
 	 */
@@ -141,7 +149,7 @@ public class JfPaquetes extends JFrame {
 				cr.create(Integer.parseInt(txtIDDestino.getText()), Integer.parseInt(txtIDOrigen.getText()) , txtprecio.getText(),  txtFechadeventa.getText(), txtHoradeventa.getText(), txtHoradesalida.getText(), txtFechadeejecucion.getText(), txtObservaciones.getText(), Integer.parseInt(txtIdAgencia.getText()), Integer.parseInt(txtMatricula.getText()), Integer.parseInt(txtIdPromotor.getText()), Integer.parseInt(txtIdCliente.getText()), Integer.parseInt(txtIdMedio.getText()));
 			}
 		});
-		btnGuardar.setBounds(466, 317, 89, 23);
+		btnGuardar.setBounds(531, 311, 89, 23);
 		contentPane.add(btnGuardar);
 		
 		txtIdAgencia = new JTextField();
@@ -188,6 +196,26 @@ public class JfPaquetes extends JFrame {
 		JLabel lblNewLabel_12 = new JLabel("Id Medio");
 		lblNewLabel_12.setBounds(90, 280, 46, 14);
 		contentPane.add(lblNewLabel_12);
+		
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.delete(Integer.parseInt(txtcodigo.getText()));
+			}
+		});
+		btnBorrar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
+		btnBorrar.setBounds(414, 311, 81, 35);
+		contentPane.add(btnBorrar);
+		
+		txtcodigo = new JTextField();
+		txtcodigo.setBounds(221, 305, 91, 35);
+		contentPane.add(txtcodigo);
+		txtcodigo.setColumns(10);
+		
+		lblNewLabel_13 = new JLabel("Codigo");
+		lblNewLabel_13.setBounds(235, 280, 46, 14);
+		contentPane.add(lblNewLabel_13);
 	}
 
 }

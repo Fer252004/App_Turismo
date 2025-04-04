@@ -10,7 +10,7 @@ public class Conexion {
 	public Connection ConectarBD() {
 		
 		Connection Connection = null;
-		
+	
 		try { 
 			
 			// parametros para conectarme a una base de datos
