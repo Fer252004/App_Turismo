@@ -37,6 +37,8 @@ public class JfOperadores extends JFrame {
 	Operador cr = new  Operador();
 	
 	 private JButton btnEliminar;
+	 private JButton btnActualizar;
+	 private JButton btnConsultar;
 	/**
 	 * Launch the application.
 	 */
@@ -169,6 +171,27 @@ public class JfOperadores extends JFrame {
 		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
 		btnEliminar.setBounds(376, 129, 81, 46);
 		contentPane.add(btnEliminar);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.Update(Integer.parseInt(txtTipodedocumento.getText()), Integer.parseInt(txtDocumento.getText()), txtNombres.getText(), txtApellidos.getText(), txtDireccion.getText(), txtCorreo.getText(),txtTelefono.getText(), Integer.parseInt(txtMatricula.getText()), Integer.parseInt(txtidoperador.getText()));
+			}
+		});
+		btnActualizar.setBounds(376, 235, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.read(Integer.parseInt(txtidoperador.getText()), txtTipodedocumento, txtDocumento, txtNombres, txtApellidos, txtDireccion, txtCorreo, txtTelefono, txtMatricula);
+			}
+			
+		});
+		btnConsultar.setBounds(146, 257, 89, 23);
+		contentPane.add(btnConsultar);
 		
 	}
 }

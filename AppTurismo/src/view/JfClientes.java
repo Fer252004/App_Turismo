@@ -225,7 +225,26 @@ public class JfClientes extends JFrame {
 		btnEliminar.setBounds(191, 306, 89, 43);
 		contentPane.add(btnEliminar);
 		
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.Update(Integer.parseInt(txtTipodedocumento.getText()), Integer.parseInt(txtDocumento.getText()), txtNombres.getText(), txtApellidos.getText(), txtEps.getText(), txtAlergias.getText(), txtFechadenacimiento.getText(), txtCorreo.getText(), txtEstadocivil.getText(), txtDireccion.getText(), txtNumerotelefonico.getText(), Integer.parseInt(txtidcliente.getText()));
+			}
+		});
+		btnActualizar.setBounds(56, 329, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.read(Integer.parseInt(txtidcliente.getText()), txtTipodedocumento, txtDocumento, txtNombres, txtApellidos, txtEps, txtAlergias, txtFechadenacimiento, txtCorreo, txtEstadocivil, txtDireccion, txtNumerotelefonico);
+			}
+		});
+		btnConsultar.setBounds(485, 316, 89, 23);
+		contentPane.add(btnConsultar);
+		
 		
 	}
-
 }

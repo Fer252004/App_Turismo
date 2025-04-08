@@ -2,8 +2,10 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controlador.Conexion;
 
@@ -122,5 +124,85 @@ public void delete( int idcompania) {
 			System.out.println(e.getMessage());
 		}
 	}
+public void Update( String razonsocial, String direccion, String telefono, String fechacreacion, String correo, String web, int idcompania ) {
+	
+	
+	Connection dbConnection = null;
+	PreparedStatement pst = null;
+	
+	String script = "Update tblcompania set  razonsocial = ?, direccion = ?, telefono = ?, fechacreacion = ?, correo = ?, web = ?, WHERE idcompania = ?;";
+	
+	try {
+		dbConnection = conector.ConectarBD();// abrir la conexion 
+		pst = dbConnection.prepareStatement(script); // abrir el buffer
+		
+		//parametrizar el campo
+	
+		 pst.setString(1, razonsocial);
+	        pst.setString(2, direccion);
+	        pst.setString(3, telefono);
+	        pst.setString(4, fechacreacion);
+	        pst.setString(5, correo);
+	        pst.setString(6, web);
+	        pst.setInt(7, idcompania);
+		// confirmar la operacion
+		int resp = JOptionPane.showConfirmDialog(null, "¿desea Actualizar esta fila?");
+		
+		if(resp == JOptionPane.OK_OPTION) {
+			pst.executeUpdate();
+			JOptionPane.showConfirmDialog(null, "fila Actualizada");
+		}
+		
+		
+	}catch (Exception e) {
+		
+		System.out.println(e.getMessage());
+	}
 }
+public void read( int idcompania, JTextField razonsocial, JTextField direccion, JTextField telefono, JTextField fechacreacion, JTextField correo, JTextField web ) {
+	
+	
+	Connection dbConnection = null;
+	PreparedStatement pst = null;
+	
+
+	String script = "SELECT * FROM  tblcompania WHERE idcompania  = ?";
+	
+	try { 
+		
+		dbConnection = conector.ConectarBD();// abrir la conexion 
+		pst = dbConnection.prepareStatement(script); // abrir el buffer
+	
+       pst.setInt(1, idcompania);
+       ResultSet rs = pst.executeQuery();
+	 
+	
+	  while (rs.next()) {
+	   
+		  
+    
+		  razonsocial.setText(rs.getString(2));
+		  direccion.setText(rs.getString(3));
+		  telefono.setText(rs.getString(4));
+		  fechacreacion.setText(rs.getString(5));
+		  correo.setText(rs.getString(6));
+		  web.setText(rs.getString(7));  
+		
+}
+
+
+} catch (Exception e) {
+
+System.out.println(e.getMessage());
+
+}
+
+}
+}  
+	
+	
+
+
+
+
 

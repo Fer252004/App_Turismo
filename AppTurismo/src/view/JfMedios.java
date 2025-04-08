@@ -30,6 +30,8 @@ public class JfMedios extends JFrame {
 	
 	
 	  Medios cr = new Medios();
+	  private JButton btnActualizar;
+	  private JButton btnconsultar;
 
 	/**
 	 * Launch the application.
@@ -52,7 +54,7 @@ public class JfMedios extends JFrame {
 	 */
 	public JfMedios() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 494, 300);
+		setBounds(100, 100, 578, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -96,7 +98,7 @@ public class JfMedios extends JFrame {
 				txtObservacion.setText("");
 			}
 		});
-		btnGuardar.setBounds(379, 75, 67, 49);
+		btnGuardar.setBounds(407, 96, 67, 49);
 		contentPane.add(btnGuardar);
 		
 		txtidmedio = new JTextField();
@@ -118,7 +120,27 @@ public class JfMedios extends JFrame {
 			}
 		});
 		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
-		btnEliminar.setBounds(379, 149, 67, 49);
+		btnEliminar.setBounds(407, 163, 67, 49);
 		contentPane.add(btnEliminar);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.Update(txtNombres.getText(), txtObservacion.getText(), Integer.parseInt(txtidmedio.getText()));
+			}
+		});
+		btnActualizar.setBounds(407, 37, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		btnconsultar = new JButton("Consultar");
+		btnconsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.read(Integer.parseInt(txtidmedio.getText()), txtNombres, txtObservacion);
+			}
+		});
+		btnconsultar.setBounds(429, 253, 89, 23);
+		contentPane.add(btnconsultar);
 	}
 }

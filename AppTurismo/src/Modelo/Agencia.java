@@ -2,10 +2,13 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controlador.Conexion;
+import view.JPrincipal;
 
 public class Agencia {
 
@@ -19,6 +22,8 @@ public class Agencia {
 	public String correo ;
 	public String web ;
 	public int idcompania;
+	
+	JPrincipal Principal = new JPrincipal();
 	
 	public int getidagencia() {
 		return idagencia;
@@ -124,26 +129,27 @@ public class Agencia {
 		}
 	}
 	
-	 public void Update(int idagencia, String nombre, String direccion, String telefono, String correo, String web, int idcompania ) {
+	 public void Update( String nombre, String direccion, String telefono, String correo, String web, int idcompania, int idagencia ) {
 		
 		
 		Connection dbConnection = null;
 		PreparedStatement pst = null;
 		
-		String script = "Update tblagencias set idagencia = ?, nombre = ?, direccion = ?, telefono = ?, correo = ?, web = ?, WHERE idcompania = ?;";
+		String script = "Update tblagencias set  nombre = ?, direccion = ?, telefono = ?, correo = ?, web = ?, idcompania = ? WHERE idagencia = ?;";
 		
 		try {
 			dbConnection = conector.ConectarBD();// abrir la conexion 
 			pst = dbConnection.prepareStatement(script); // abrir el buffer
 			
 			//parametrizar el campo
-			    pst.setInt(1, idagencia);
-			    pst.setString(2, nombre);
-		        pst.setString(3, direccion);
-		        pst.setString(4, telefono);
-		        pst.setString(5, correo);
-		        pst.setString(6, web);
-		        pst.setInt(7, idcompania);
+		
+			    pst.setString(1, nombre);
+		        pst.setString(2, direccion);
+		        pst.setString(3, telefono);
+		        pst.setString(4, correo);
+		        pst.setString(5, web);
+		        pst.setInt(6, idcompania);
+		        pst.setInt(7, idagencia);
 		        pst.executeUpdate();
 			
 			// confirmar la operacion
@@ -158,15 +164,54 @@ public class Agencia {
 		}catch (Exception e) {
 			
 			System.out.println(e.getMessage());
-		}
-	}
 		
-	}
+		}
+		
+		
+	 }
+
+	 
+	 public void read(int idagencia, JTextField  nombre, JTextField direccion, JTextField telefono,  JTextField correo, JTextField web, JTextField idcompania ) {              
+			
+			
+			Connection dbConnection = null;
+			PreparedStatement pst = null;
+			
+	 
+			String script = "SELECT * FROM  tblagencias WHERE idagencia  = ?";
+			
+			try { 
+				
+				dbConnection = conector.ConectarBD();// abrir la conexion 
+				pst = dbConnection.prepareStatement(script); // abrir el buffer
+			
+		       pst.setInt(1, idagencia);
+		       ResultSet rs = pst.executeQuery();
+			 
+			
+			  while (rs.next()) {
+			   
+				  
+		    
+			  nombre.setText(rs.getString(1));
+			  direccion.setText(rs.getString(2));
+			  telefono.setText(rs.getString(3));
+			  correo.setText(rs.getString(4));
+			  web.setText(rs.getString(5));
+			  idcompania.setText(rs.getString(6));  
+			  	 
+			 
 	
+ }
      
  
-
-
+} catch (Exception e) {
 	
+	System.out.println(e.getMessage());
 
+}
+
+	 }
+}
+	 
 

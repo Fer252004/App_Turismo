@@ -10,6 +10,8 @@ import Modelo.Agencia;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -126,8 +128,21 @@ public class JfAgencia extends JFrame {
 				
 				Agencia cr = new Agencia();
 				
-				cr.create(Integer.parseInt(txtIdagencia.getText()),txtnombre.getText(), txtdireccion.getText(), txttelefono.getText(), txtcorreo.getText(), txtweb.getText(), Integer.parseInt(txtIDcompañia.getText()));
-			}
+				try {
+					
+					cr.create(Integer.parseInt(txtIdagencia.getText()),txtnombre.getText(), txtdireccion.getText(), txttelefono.getText(), txtcorreo.getText(), txtweb.getText(), Integer.parseInt(txtIDcompañia.getText()));
+					txtIdagencia.setText("");
+					txtnombre.setText("");
+					txtdireccion.setText("");
+					txttelefono.setText("");
+					txtcorreo.setText("");
+					txtweb.setText("");
+					txtIDcompañia.setText("");
+					
+				} catch (Exception E) {
+				  JOptionPane.showMessageDialog(null, "Ingrese datos");
+				}
+			  }
 		});
 		btnRegistrar.setBounds(364, 227, 89, 40);
 		contentPane.add(btnRegistrar);
@@ -165,13 +180,22 @@ public class JfAgencia extends JFrame {
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				cr.Update(Integer.parseInt(txtIdagencia.getText()),txtnombre.getText(), txtdireccion.getText(), txttelefono.getText(), txtcorreo.getText(), txtweb.getText(), Integer.parseInt(txtIDcompañia.getText()));
+				cr.Update(txtnombre.getText(), txtdireccion.getText(), txttelefono.getText(), txtcorreo.getText(), txtweb.getText(), Integer.parseInt(txtIDcompañia.getText()), Integer.parseInt(txtIdagencia.getText()));
 			}
 		});
 		btnActualizar.setBounds(197, 236, 102, 31);
 		contentPane.add(btnActualizar);
 		
 		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.read(Integer.parseInt(txtIdagencia.getText()), txtnombre, txtdireccion, txttelefono, txtcorreo, txtweb, txtIDcompañia);
+			
+			
+			}
+			
+		});
 		btnConsultar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\9004762_search_find_zoom_magnifier_icon.png"));
 		btnConsultar.setBounds(474, 36, 69, 55);
 		contentPane.add(btnConsultar);

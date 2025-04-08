@@ -118,5 +118,26 @@ public class JfTiposdemedios extends JFrame {
 		txtIdtipodemedio.setBounds(100, 81, 116, 27);
 		contentPane.add(txtIdtipodemedio);
 		txtIdtipodemedio.setColumns(10);
+		
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.Update(txtNombre.getText(), txtobservacion1.getText(), Integer.parseInt(txtIdtipodemedio.getText()));
+				
+			}
+		});
+		btnActualizar.setBounds(408, 295, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			cr.read(Integer.parseInt(txtIdtipodemedio.getText()), txtNombre, txtobservacion1);
+			}
+		});
+		btnConsultar.setBounds(443, 219, 89, 23);
+		contentPane.add(btnConsultar);
 	}
 }

@@ -2,8 +2,10 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controlador.Conexion;
 
@@ -103,4 +105,70 @@ public void delete ( int idtipo) {
 			System.out.println(e.getMessage());
 		}
 	}
+public void Update( String nombre, String observacion, int Idtipo ) {
+	
+	
+	Connection dbConnection = null;
+	PreparedStatement pst = null;
+	
+	String script = "Update tbltipotransporte set  nombre = ?, observacion = ? WHERE Idtipo = ?;";
+	
+	try {
+		dbConnection = conector.ConectarBD();// abrir la conexion 
+		pst = dbConnection.prepareStatement(script); // abrir el buffer
+		
+		//parametrizar el campo
+	
+		  pst.setString(1, nombre);
+	        pst.setString(2, observacion);
+	        pst.setInt(3, Idtipo);
+	        pst.executeUpdate();
+        			// confirmar la operacion
+		int resp = JOptionPane.showConfirmDialog(null, "¿desea Actualizar esta fila?");
+		
+		if(resp == JOptionPane.OK_OPTION) {
+			pst.executeUpdate();
+			JOptionPane.showConfirmDialog(null, "fila Actualizada");
+		}
+		
+		
+	}catch (Exception e) {
+		
+		System.out.println(e.getMessage());
+	}
+}
+
+public void read(int Idtipo, JTextField nombre, JTextField observacion) {
+	
+	Connection dbConnection = null;
+	PreparedStatement pst = null;
+	
+
+	String script = "SELECT * FROM  tbltipotransporte WHERE Idtipo  = ?";
+	
+	try { 
+		
+		dbConnection = conector.ConectarBD();// abrir la conexion 
+		pst = dbConnection.prepareStatement(script); // abrir el buffer
+	
+       pst.setInt(1, Idtipo);
+       ResultSet rs = pst.executeQuery();
+	 
+	
+	  while (rs.next()) {
+	   
+		 nombre.setText(rs.getString(2));
+		 observacion.setText(rs.getString(3));
+		  
+		    
+		
+}
+
+
+} catch (Exception e) {
+
+System.out.println(e.getMessage());
+
+}
+}
 }

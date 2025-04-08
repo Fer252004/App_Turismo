@@ -39,6 +39,7 @@ public class JfCompañia extends JFrame {
     
 	
 	Compañia cr = new Compañia();
+	private JButton btnActualizar;
 	/**
 	 * Launch the application.
 	 */
@@ -154,5 +155,26 @@ public class JfCompañia extends JFrame {
 		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
 		btnEliminar.setBounds(361, 218, 76, 41);
 		contentPane.add(btnEliminar);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 
+				cr.Update(txtrazonsocial.getText(),txtDireccion.getText(), txtTelefono.getText(), txtFechadecreacion.getText(), txtCorreo.getText(), txtWeb.getText(),Integer.parseInt(txtidcompañia.getText()));
+				
+			}
+		});
+		btnActualizar.setBounds(51, 218, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.read(Integer.parseInt(txtidcompañia.getText()), txtrazonsocial, txtDireccion, txtTelefono, txtFechadecreacion, txtCorreo, txtWeb);
+			}
+		});
+		btnConsultar.setBounds(458, 133, 89, 23);
+		contentPane.add(btnConsultar);
 	}
 }

@@ -34,6 +34,8 @@ public class JfVehiculo extends JFrame {
 	
 	 Vehiculos cr = new Vehiculos();
 	 private JButton btnEliminar;
+	 private JButton btnActualizar;
+	 private JButton btnConsultar;
 
 	/**
 	 * Launch the application.
@@ -158,6 +160,26 @@ public class JfVehiculo extends JFrame {
 		btnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
 		btnEliminar.setBounds(200, 228, 67, 39);
 		contentPane.add(btnEliminar);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.Update(Integer.parseInt(txtplaca.getText()), txtmarca.getText(), Integer.parseInt(txtpuestos.getText()), txtmodelo.getText(), txtnumeromotor.getText(), txtcategoria.getText(), Integer.parseInt(txtidtipo.getText()), Integer.parseInt(txtmatricula.getText()));
+			}
+		});
+		btnActualizar.setBounds(31, 236, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.read(Integer.parseInt(txtmatricula.getText()), txtplaca, txtmarca, txtpuestos, txtmodelo, txtnumeromotor, txtcategoria, txtidtipo);
+			}
+		});
+		btnConsultar.setBounds(414, 173, 89, 23);
+		contentPane.add(btnConsultar);
 	}
 }
 

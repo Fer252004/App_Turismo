@@ -42,6 +42,7 @@ public class JfPromotores extends JFrame {
 	   private JButton btnborrar;
 	   private JTextField txtidpromotor;
 	   private JLabel lblNewLabel_10;
+	   private JButton btnActualizar;
 
 	/**
 	 * Launch the application.
@@ -64,7 +65,7 @@ public class JfPromotores extends JFrame {
 	 */
 	public JfPromotores() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 615, 450);
+		setBounds(100, 100, 638, 467);
 		contentPane = new JPanel();
 		contentPane.addMouseListener(new MouseAdapter() {
 			
@@ -194,7 +195,25 @@ public class JfPromotores extends JFrame {
 		lblNewLabel_10 = new JLabel("Id  Promotor");
 		lblNewLabel_10.setBounds(117, 336, 66, 14);
 		contentPane.add(lblNewLabel_10);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cr.Update(txtnombre.getText(), txtapellido.getText(), Integer.parseInt(txtTipodedocumento.getText()), Integer.parseInt(txtDocumento.getText()), txtdireccion.getText(), txtcorreopersonal.getText(), txtcorreocor.getText(), txtfechadenacimiento.getText(), txttelefono.getText(), Integer.parseInt(txtcodigo.getText()), Integer.parseInt(txtidpromotor.getText()));
+			}
+		});
+		btnActualizar.setBounds(521, 361, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.read(Integer.parseInt(txtidpromotor.getText()), txtnombre, txtapellido, txtTipodedocumento, txtDocumento, txtdireccion, txtcorreopersonal, txtcorreocor, txtfechadenacimiento, txttelefono, txtcodigo);
+			}
+		});
+		btnConsultar.setBounds(521, 283, 89, 23);
+		contentPane.add(btnConsultar);
 	}
-
 }
 

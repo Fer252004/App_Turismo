@@ -2,8 +2,10 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controlador.Conexion;
 
@@ -139,5 +141,90 @@ public class Operador {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-}
+  public void Update( int tipodocumento, int documento, String nombre, String apellido, String direccion, String correo, String telefono, int matricula, int idoperador) {
+		
+		
+		Connection dbConnection = null;
+		PreparedStatement pst = null;
+		
+		String script = "Update tbloperador set  tipodocumento = ?, documento = ?, nombre = ?, apellido = ?, direccion = ?, correo = ?, telefono = ?, matricula = ? WHERE idoperador = ?;";
+		
+		try {
+			dbConnection = conector.ConectarBD();// abrir la conexion 
+			pst = dbConnection.prepareStatement(script); // abrir el buffer
+			
+			//parametrizar el campo
+		
+			pst.setInt(1, tipodocumento);
+	        pst.setInt(2, documento);
+	        pst.setString(3, nombre);
+	        pst.setString(4, apellido);
+	        pst.setString(5, direccion);
+	        pst.setString(6, correo);
+	        pst.setString(7, telefono);
+	        pst.setInt(8, matricula);
+	        pst.setInt(9, idoperador);
+	        
+	        			// confirmar la operacion
+			int resp = JOptionPane.showConfirmDialog(null, "¿desea Actualizar esta fila?");
+			
+			if(resp == JOptionPane.OK_OPTION) {
+				pst.executeUpdate();
+				JOptionPane.showConfirmDialog(null, "fila Actualizada");
+			}
+			
+			
+		}catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+		}
+	}
+  
+  public void read(int idoperador, JTextField tipodocumento, JTextField documento, JTextField nombre, JTextField apellido, JTextField direccion, JTextField correo, JTextField telefono, JTextField matricula) {
+		
+		Connection dbConnection = null;
+		PreparedStatement pst = null;
+		
+
+		String script = "SELECT * FROM  tbloperador WHERE idoperador  = ?";
+		
+		try { 
+			
+		 dbConnection = conector.ConectarBD();// abrir la conexion 
+			pst = dbConnection.prepareStatement(script); // abrir el buffer
+		
+	       pst.setInt(1, idoperador);
+	       ResultSet rs = pst.executeQuery();
+		 
+		
+		  while (rs.next()) {
+		   
+			  tipodocumento.setText(rs.getString(2));
+			  documento.setText(rs.getString(3));
+			  tipodocumento.setText(rs.getString(4));
+			  documento.setText(rs.getString(5));  
+			  nombre.setText(rs.getString(6));
+			  apellido.setText(rs.getString(7));
+			  direccion.setText(rs.getString(8));
+			  correo.setText(rs.getString(9));
+			  telefono.setText(rs.getString(10));
+			  matricula.setText(rs.getString(11));
+			 
+			 
+
+
+				
+		  }
+		      
+		  
+		 } catch (Exception e) {
+		 	
+		 	System.out.println(e.getMessage());
+
+		 }
+
+		 	 }
+		
+	}
+
+

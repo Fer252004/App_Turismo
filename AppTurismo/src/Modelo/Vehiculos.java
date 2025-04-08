@@ -2,8 +2,10 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controlador.Conexion;
 
@@ -133,8 +135,91 @@ public class Vehiculos {
 			
 			System.out.println(e.getMessage());
 		}
-	}
+
+     
+     }
+     
+     public void Update( int placa, String marca, int puestos, String modelo, String numeromotor, String  categoria, int idtipo, int matricula  ) {
+    		
+    		
+    		Connection dbConnection = null;
+    		PreparedStatement pst = null;
+    		
+    		String script = "Update tblvehiculo set  placa = ?, marca = ?, puestos = ?, modelo = ?, numeromotor = ?, categoria = ?, Idtipo = ? WHERE matricula = ?;";
+    		
+    		try {
+    			dbConnection = conector.ConectarBD();// abrir la conexion 
+    			pst = dbConnection.prepareStatement(script); // abrir el buffer
+    			
+    			//parametrizar el campo
+    		
+
+    	       
+    	        pst.setInt(1, placa);
+    	        pst.setString(2, marca);
+    	        pst.setInt(3, puestos);
+    	        pst.setString(4, modelo);
+    	        pst.setString(5, numeromotor);
+    	        pst.setString(6, categoria);
+    	        pst.setInt(7, idtipo);
+    	        pst.setInt(8, matricula);
+    	        			// confirmar la operacion
+    			int resp = JOptionPane.showConfirmDialog(null, "¿desea Actualizar esta fila?");
+    			
+    			if(resp == JOptionPane.OK_OPTION) {
+    				pst.executeUpdate();
+    				JOptionPane.showConfirmDialog(null, "fila Actualizada");
+    			}
+    			
+    			
+    		}catch (Exception e) {
+    			
+    			System.out.println(e.getMessage());
+    		}
+    	}
+     
+     public void read(int matricula, JTextField placa, JTextField marca, JTextField puestos, JTextField modelo, JTextField numeromotor, JTextField  categoria, JTextField idtipo) {
+ 		
+ 		Connection dbConnection = null;
+ 		PreparedStatement pst = null;
+ 		
+
+ 		String script = "SELECT * FROM  tblvehiculo WHERE matricula  = ?";
+ 		
+ 		try { 
+ 			
+ 		 dbConnection = conector.ConectarBD();// abrir la conexion 
+ 			pst = dbConnection.prepareStatement(script); // abrir el buffer
+ 		
+ 	       pst.setInt(1, matricula);
+ 	       ResultSet rs = pst.executeQuery();
+ 		 
+ 		
+ 		  while (rs.next()) {
+ 		   
+ 			 placa.setText(rs.getString(2));
+ 			marca.setText(rs.getString(3));
+ 			puestos.setText(rs.getString(4));
+ 			modelo.setText(rs.getString(5));  
+ 			numeromotor.setText(rs.getString(6));
+ 			categoria.setText(rs.getString(7));
+ 			idtipo.setText(rs.getString(8));
+ 			  
+ 			
+ 				
+ 		  }
+ 		      
+ 		  
+ 		 } catch (Exception e) {
+ 		 	
+ 		 	System.out.println(e.getMessage());
+
+ 		 }
+
+ 		 	 }
+ 		
 }
+
 
 
 

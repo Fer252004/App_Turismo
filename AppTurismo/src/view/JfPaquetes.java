@@ -40,6 +40,8 @@ public class JfPaquetes extends JFrame {
 
 	
 	   Paquete cr = new Paquete();
+	   private JButton btnActualizar;
+	   private JButton btnConsultar;
 	/**
 	 * Launch the application.
 	 */
@@ -61,7 +63,7 @@ public class JfPaquetes extends JFrame {
 	 */
 	public JfPaquetes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 664, 428);
+		setBounds(100, 100, 701, 486);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -216,6 +218,26 @@ public class JfPaquetes extends JFrame {
 		lblNewLabel_13 = new JLabel("Codigo");
 		lblNewLabel_13.setBounds(235, 280, 46, 14);
 		contentPane.add(lblNewLabel_13);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.Update(Integer.parseInt(txtIDDestino.getText()), Integer.parseInt(txtIDOrigen.getText()) , txtprecio.getText(),  txtFechadeventa.getText(), txtHoradeventa.getText(), txtHoradesalida.getText(), txtFechadeejecucion.getText(), txtObservaciones.getText(), Integer.parseInt(txtIdAgencia.getText()), Integer.parseInt(txtMatricula.getText()), Integer.parseInt(txtIdPromotor.getText()), Integer.parseInt(txtIdCliente.getText()), Integer.parseInt(txtIdMedio.getText()), Integer.parseInt(txtcodigo.getText()));
+			}
+		});
+		btnActualizar.setBounds(480, 382, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.read(Integer.parseInt(txtcodigo.getText()), txtIDDestino, txtIDOrigen, txtprecio, txtHoradeventa, txtFechadeventa, txtHoradesalida, txtFechadeejecucion, txtObservaciones, txtIdAgencia, txtMatricula, txtIdPromotor, txtIdCliente, txtIdMedio);
+			}
+		});
+		btnConsultar.setBounds(147, 382, 89, 23);
+		contentPane.add(btnConsultar);
 	}
 
 }

@@ -48,7 +48,7 @@ public class Tiposdetransporte extends JFrame {
 	 */
 	public Tiposdetransporte() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 541, 325);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -107,5 +107,25 @@ public class Tiposdetransporte extends JFrame {
 		brnEliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\3669361_delete_ic_icon.png"));
 		brnEliminar.setBounds(328, 106, 66, 48);
 		contentPane.add(brnEliminar);
+		
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.Update(txtNombre.getText(), txtObservacion.getText(), Integer.parseInt(txtIdtipo.getText()));
+			}
+		});
+		btnActualizar.setBounds(348, 188, 89, 23);
+		contentPane.add(btnActualizar);
+		
+		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cr.read(Integer.parseInt(txtIdtipo.getText()), txtNombre, txtObservacion);
+			}
+		});
+		btnConsultar.setBounds(436, 158, 89, 23);
+		contentPane.add(btnConsultar);
 	}
 }

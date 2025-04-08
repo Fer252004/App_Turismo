@@ -2,8 +2,10 @@ package Modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import Controlador.Conexion;
 
@@ -25,6 +27,14 @@ public class Paquete {
 	public int idpromotor ;
 	public int idcliente ;
 	public int idmedio ;
+	public int codigo;
+	
+     public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
 
 	
 	public int getIddestino() {
@@ -173,5 +183,96 @@ public void delete ( int codigo) {
 		}
 	}
 	
+public void Update( int iddestino, int idorigen, String precio, String fechaventa, String horaventa,  String horasalida, String fechaejecucion, String observaciones, int idagencia, int matricula, int idpromotor, int idcliente, int idmedio, int codigo ) {
 	
+	
+	Connection dbConnection = null;
+	PreparedStatement pst = null;
+	
+	String script = "Update tblpaquete set  iddestino = ?, idorigen = ?, precio = ?, fechaventa = ?, horaventa = ?, horasalida = ?, fechaejecucion = ?, observaciones = ?, idagencia = ?, matricula = ?, idpromotor = ?, idcliente = ?, idmedio = ? WHERE codigo = ?;";
+	
+	try {
+		dbConnection = conector.ConectarBD();// abrir la conexion 
+		pst = dbConnection.prepareStatement(script); // abrir el buffer
+		
+		//parametrizar el campo
+	
+		   pst.setInt(1, iddestino);
+	        pst.setInt(2, idorigen);
+	        pst.setString(3, precio);
+	        pst.setNString(4, fechaventa);
+	        pst.setString(5, horaventa);
+	        pst.setString(6, horasalida);
+	        pst.setString(7, fechaejecucion);
+	        pst.setString(8, observaciones);
+	        pst.setInt(9, idagencia);
+	        pst.setInt(10, matricula);
+	        pst.setInt(11, idpromotor);
+	        pst.setInt(12, idcliente);
+	        pst.setInt(13, idmedio);
+	        pst.setInt(14, codigo);
+		// confirmar la operacion
+		int resp = JOptionPane.showConfirmDialog(null, "¿desea Actualizar esta fila?");
+		
+		if(resp == JOptionPane.OK_OPTION) {
+			pst.executeUpdate();
+			JOptionPane.showConfirmDialog(null, "fila Actualizada");
+		}
+		
+		
+	}catch (Exception e) {
+		
+		System.out.println(e.getMessage());
+	}
+}
+
+public void read(int codigo, JTextField iddestino, JTextField idorigen, JTextField precio, JTextField fechaventa, JTextField horaventa,  JTextField horasalida, JTextField fechaejecucion, JTextField observaciones, JTextField idagencia, JTextField matricula, JTextField idpromotor, JTextField idcliente, JTextField idmedio  ) {
+	
+	
+	Connection dbConnection = null;
+	PreparedStatement pst = null;
+	
+
+	String script = "SELECT * FROM  tblcliente WHERE idcliente  = ?";
+	
+	try { 
+		
+		dbConnection = conector.ConectarBD();// abrir la conexion 
+		pst = dbConnection.prepareStatement(script); // abrir el buffer
+	
+       pst.setInt(1, codigo);
+       ResultSet rs = pst.executeQuery();
+	 
+	
+	  while (rs.next()) {
+	   
+		  
+    
+		  iddestino.setText(rs.getString(2));
+		  idorigen.setText(rs.getString(3));
+		  precio.setText(rs.getString(4));
+		  fechaventa.setText(rs.getString(5));
+		  horaventa.setText(rs.getString(6));
+		  horasalida.setText(rs.getString(7));  
+		  fechaejecucion.setText(rs.getString(8));
+		  observaciones.setText(rs.getString(9));
+		  idagencia.setText(rs.getString(10));
+		  matricula.setText(rs.getString(11));
+		  idpromotor.setText(rs.getString(12));
+		  idcliente.setText(rs.getString(13));
+		  idmedio.setText(rs.getString(14));
+	  	 
+	 
+
+}
+
+
+} catch (Exception e) {
+
+System.out.println(e.getMessage());
+
+}
+
+}
+
 }
