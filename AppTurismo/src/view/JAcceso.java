@@ -11,9 +11,12 @@ import Modelo.Promotores;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class JAcceso extends JFrame {
 	
@@ -75,12 +78,31 @@ public class JAcceso extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					
+					pr.ControlDeAcesso(Integer.parseInt(txtdocumento.getText()),txtContraseña.getText());	
+					
+				} catch (Exception E) {
+				JOptionPane.showMessageDialog(null, "No has ingresado datos");
+					
+				}
+			}
+		});
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				pr.ControlDeAcesso(Integer.parseInt(txtdocumento.getText()),txtContraseña.getText());
-				
-				
+				try {
+					pr.ControlDeAcesso(Integer.parseInt(txtdocumento.getText()),txtContraseña.getText());	
+					
+				} catch (Exception E) {
+					
+				 JOptionPane.showMessageDialog(null, " No has ingresado datos");
+				}
+				;	
 				
 			}
 		});

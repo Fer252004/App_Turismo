@@ -252,8 +252,11 @@ public void Update(  String nombre, String apellido, int tipodocumento, int docu
 
 		 }
 
-		 	 }
+  }
   
+
+
+
   
   public void ControlDeAcesso(int documento, String Contraseña) {
 		
@@ -263,52 +266,32 @@ public void Update(  String nombre, String apellido, int tipodocumento, int docu
 
 		String script = "SELECT * FROM  tblpromotores WHERE documento = ? and Contraseña = ?";
 		
-		try { 
-			
-		 dbConnection = conector.ConectarBD();// abrir la conexion 
-			pst = dbConnection.prepareStatement(script); // abrir el buffer
-		
-	       pst.setInt(1, documento);
-	       pst.setString(2, Contraseña);
-	       ResultSet rs = pst.executeQuery();
-		 
-		
-		  while (rs.next()) {
-		   
-			  Principal.setVisible(true);
-			  
-	}
-		  
-				
+		                          
 				
 			try { 
 				
-				Connection Connection = null;
+				dbConnection = conector.ConectarBD();
+			   pst = dbConnection.prepareStatement(script);
+			   pst.setInt(1, documento);
+			   pst.setString(2, Contraseña);
+				ResultSet resultSet = pst.executeQuery();
+			if (resultSet.next()) {
 				
-				// parametros para conectarme a una base de datos
-				Connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bd_turismo", "documento", "Contraseña");
-				System.out.println("Datos Ingresados correctamente");
-				
-				}
-
-			   catch (SQLException e) {	
-		    	System.out.println("Datos Incorrectos");
-		    	
-	
+				Principal.setVisible(true);
+				JOptionPane.showMessageDialog(null, "Acesso permitido");
+			}
 			
-	}	
-		
-		 
-	 } catch (Exception e) {
-		 	
-		 	System.out.println(e.getMessage());
-		 	
-	 }
-
+			else {
+              JOptionPane.showMessageDialog(null, "Datos incorrecto O Se te a olvidado llenar un campo");
+			}
+			
+			}catch (Exception e) {
+				System.out.println(e.getMessage());
+				
+			}
   }
+			}
+		
+		
   
   
-}
-  
-
-
